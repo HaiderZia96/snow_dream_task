@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Item Management API
 
 A Laravel-based RESTful API for managing items with JWT authentication and real-time updates.
@@ -44,3 +45,6 @@ Authorization: Bearer {your_token}
 ## Real-time Updates
 
 The API broadcasts events when items are created or updated. Use Laravel Echo to listen for these events in your frontend application.
+=======
+# snow_dream_task
+>>>>>>> 186e71124239e69f9892e18bf1bbdeab64919148
