@@ -16,7 +16,7 @@ class ItemController extends Controller
 
         if ($request->has('status')) {
             $query->when($request->status === 'active', fn($q) => $q->active())
-                  ->when($request->status === 'inactive', fn($q) => $q->inactive());
+                ->when($request->status === 'inactive', fn($q) => $q->inactive());
         }
 
         if ($request->has(['min_price', 'max_price'])) {
@@ -56,37 +56,34 @@ class ItemController extends Controller
     public function update(Request $request, $itemId)
     {
         $item = Item::find($itemId);
-    
+
         if (!$item) {
             return response()->json(['message' => 'Item not found'], 404);
         }
-    
+
         $item->update($request->only(['title', 'description', 'price', 'status']));
-    
-        return response()->json($item->load('owner'),200);
+
+        return response()->json($item->load('owner'), 200);
     }
-    
-    
+
+
 
     public function destroy(Request $request, $itemId)
     {
-        // Find the item by ID
+
         $item = Item::find($itemId);
-    
-        // Check if the item exists
+
+
         if (!$item) {
             return response()->json(['message' => 'Item not found'], 404);
         }
-    
-        // Authorize the deletion action
+
+
         $this->authorize('delete', $item);
-    
-        // Proceed with the deletion
+
+
         $item->delete();
-    
-        // Return a success message
+
         return response()->json(['message' => 'Item deleted successfully'], 200);
     }
-    
-
 }
